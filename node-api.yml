@@ -31,7 +31,7 @@ steps:
 
   # Step 5: Build the project (if any build steps are needed)
   - script: |
-      echo "Build step (if any) goes here"
+      npm run build
     displayName: 'Build Project'
 
   # Optional: Publish build artifacts
