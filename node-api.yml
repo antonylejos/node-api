@@ -1,0 +1,42 @@
+# YAML pipeline for building a Node.js project on Windows agent
+trigger:
+- main 
+
+pool: 'antony-selfhosted' 
+
+steps:
+  - script: |
+      echo "Hello"
+    displayName: 'Test'
+
+  # Step 1: Check out the code from the repository
+  # - task: Checkout@1
+  #   displayName: 'Checkout Code'
+
+  # Step 2: Install Node.js
+  - task: UseNode@1
+    displayName: 'Use Node.js'
+    inputs:
+      version: '16.x'  # Specify the Node.js version to use
+
+  # Step 3: Install dependencies
+  - script: |
+      npm install
+    displayName: 'Install Dependencies'
+
+  # # Step 4: Run tests
+  # - script: |
+  #     npm test
+  #   displayName: 'Run Tests'
+
+  # Step 5: Build the project (if any build steps are needed)
+  - script: |
+      npm run build
+    displayName: 'Build Project'
+
+  # Optional: Publish build artifacts
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Build Artifacts'
+    inputs:
+      PathtoPublish: '.'  # Replace with your build output directory if applicable
+      ArtifactName: 'drop'
