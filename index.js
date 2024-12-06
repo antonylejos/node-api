@@ -1,31 +1,27 @@
+// Import the required modules
 const express = require('express');
+const bodyParser = require('body-parser');
+
 const app = express();
 const port = 3000;
 
-app.use(express.json()); // Middleware to parse JSON
+// Middleware to parse JSON
+app.use(bodyParser.json());
 
-// Routes
-app.get('/', (req, res) => {
-    res.send('Welcome to the Node.js API!');
-});
+// Route to add two numbers
+app.post('/add', (req, res) => {
+    const { num1, num2 } = req.body;
 
-app.get('/users', (req, res) => {
-    const users = [
-        { id: 1, name: 'Alice' },
-        { id: 2, name: 'Bob' }
-    ];
-    res.json(users);
-});
-
-app.post('/users', (req, res) => {
-    const newUser = req.body;
-    if (!newUser.name) {
-        return res.status(400).json({ error: 'Name is required' });
+    // Check if both numbers are provided
+    if (typeof num1 === 'number' && typeof num2 === 'number') {
+        const result = num1 + num2;
+        res.status(200).json({ result });
+    } else {
+        res.status(400).json({ error: 'Invalid input. Please provide two numbers.' });
     }
-    newUser.id = Date.now(); // Generate a simple unique ID
-    res.status(201).json(newUser);
 });
 
+// Start the server
 app.listen(port, () => {
-    console.log(`API is running at http://localhost:${port}`);
+    console.log(`Server is running on http://localhost:${port}`);
 });
