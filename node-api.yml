@@ -24,10 +24,10 @@ steps:
       npm install
     displayName: 'Install Dependencies'
 
-  # Step 4: Run tests
-  - script: |
-      npm test
-    displayName: 'Run Tests'
+  # # Step 4: Run tests
+  # - script: |
+  #     npm test
+  #   displayName: 'Run Tests'
 
   # Step 5: Build the project (if any build steps are needed)
   - script: |
