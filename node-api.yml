@@ -10,8 +10,8 @@ steps:
     displayName: 'Test'
 
   # Step 1: Check out the code from the repository
-  - task: Checkout@1
-    displayName: 'Checkout Code'
+  # - task: Checkout@1
+  #   displayName: 'Checkout Code'
 
   # # Step 2: Install Node.js
   # - task: UseNode@1
