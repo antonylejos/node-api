@@ -18,7 +18,20 @@ stages:
       inputs:
         version: '16.x'
 
-    - script: |
+    - powershell:  |
+        # Install Chocolatey (Package manager for Windows)
+        Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12;
+        Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+
+        # Install Docker using Chocolatey
+        choco install docker-desktop -y
+        
+        # Wait for Docker Desktop to start (can take a while)
+        Start-Sleep -Seconds 30
+
+        # Verify Docker is installed
+        docker --version
+
         docker build -t $(containerRegistry)/$(imageName):$(Build.BuildId) .
         docker push $(containerRegistry)/$(imageName):$(Build.BuildId)
       displayName: 'Build and Push Docker Image'
