@@ -38,5 +38,5 @@ steps:
   - task: PublishBuildArtifacts@1
     displayName: 'Publish Build Artifacts'
     inputs:
-      PathtoPublish: 'dist'  # Replace with your build output directory if applicable
+      PathtoPublish: '.'  # Replace with your build output directory if applicable
       ArtifactName: 'drop'
