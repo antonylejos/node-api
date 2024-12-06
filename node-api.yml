@@ -5,6 +5,10 @@ trigger:
 pool: 'antony-selfhosted' 
 
 steps:
+  - script: |
+      echo "Hello"
+    displayName: 'Test'
+
   # Step 1: Check out the code from the repository
   - task: Checkout@1
     displayName: 'Checkout Code'
